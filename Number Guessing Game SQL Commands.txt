@@ -1,0 +1,45 @@
+---------------------------------------------------------------------
+1. Connect the periodic_table database
+---------------------------------------------------------------------
+psql --username=freecodecamp --dbname=postgres
+
+CREATE DATABASE number_guess;
+
+\c number_guess;
+
+---------------------------------------------------------------------
+2. Prepare a git directory
+---------------------------------------------------------------------
+mkdir number_guessing_game
+cd number_guessing_game
+git init
+git checkout -b main
+git commit -m "Initial commit"
+
+---------------------------------------------------------------------
+3. Create files for the git repository
+---------------------------------------------------------------------
+touch number_guess.sh
+chmod +x number_guess.sh
+
+---------------------------------------------------------------------
+4. Create tables as required conditions
+---------------------------------------------------------------------
+CREATE TABLE users(
+	user_id SERIAL,
+	username VARCHAR(40) NOT NULL UNIQUE
+);
+
+CREATE TABLE games(
+	game_id SERIAL,
+	user_id INT NOT NULL,
+	number_of_guesses INT NOT NULL
+);
+
+---------------------------------------------------------------------
+5. Primary Key and Foreign Key assignment
+---------------------------------------------------------------------
+ALTER TABLE users ADD PRIMARY KEY(user_id);
+ALTER TABLE games ADD PRIMARY KEY(game_id);
+
+ALTER TABLE games ADD FOREIGN KEY(user_id) REFERENCES users(user_id);
